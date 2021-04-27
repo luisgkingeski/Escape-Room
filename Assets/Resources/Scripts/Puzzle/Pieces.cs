@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pieces : MonoBehaviour
 {
     public int pieceIndex;
+    public int indexInBoard;
     public LayerMask layerMask;
     public bool canMove = false;
     private Puzzle1 p;
@@ -94,6 +95,7 @@ public class Pieces : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         pieceIndex = int.Parse(gameObject.name);
+        indexInBoard = pieceIndex;
     }
 
     private void OnMouseDown()

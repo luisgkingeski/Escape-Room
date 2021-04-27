@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Cinemachine;
+using System.Collections;
 using UnityEngine;
-using Cinemachine;
 
 public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
 {
@@ -15,9 +14,16 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
     public CinemachineVirtualCamera puzzle3;
 
 
+
+
     private void Start()
     {
         cinemachineCamera.SetActive(false);
+    }
+
+    public void StartReturnPOV()
+    {
+        StartCoroutine(ReturnPOV());
     }
 
     public void StartPuzzle1()
@@ -36,16 +42,28 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
     }
 
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(ReturnPOV());
+        }
+    }
     public IEnumerator ReturnPOV()
     {
+        //pov.m_Priority = 0;
+        //puzzle1.m_Priority = 10;
+        //puzzle2.m_Priority = 10;
+        //puzzle3.m_Priority = 10;
         pov.m_Priority = 10;
         puzzle1.m_Priority = 0;
         puzzle2.m_Priority = 0;
         puzzle3.m_Priority = 0;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1);      
         head.transform.parent = mainCamera.transform;
         mainCamera.SetActive(true);
         cinemachineCamera.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public IEnumerator Puzzle1()
@@ -54,9 +72,10 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         mainCamera.SetActive(false);
         cinemachineCamera.SetActive(true);
         pov.m_Priority = 10;
-        yield return new WaitForSeconds(1);
-        pov.m_Priority = 9;
+        yield return new WaitForSeconds(0.1f);
+        pov.m_Priority = 0;
         puzzle1.m_Priority = 10;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public IEnumerator Puzzle2()
@@ -66,7 +85,7 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         cinemachineCamera.SetActive(true);
         pov.m_Priority = 10;
         yield return new WaitForSeconds(1);
-        pov.m_Priority = 9;
+        pov.m_Priority = 0;
         puzzle2.m_Priority = 10;
     }
 
@@ -77,7 +96,7 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         cinemachineCamera.SetActive(true);
         pov.m_Priority = 10;
         yield return new WaitForSeconds(1);
-        pov.m_Priority = 9;
+        pov.m_Priority = 0;
         puzzle3.m_Priority = 10;
     }
 

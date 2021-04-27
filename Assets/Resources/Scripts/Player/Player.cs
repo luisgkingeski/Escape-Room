@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private Vector3 velocity;
     public float gravity = -9.81f;
     private ChangeCamera changeCamera;
-
+    public LayerMask puzzleLayers;
     private void Start()
     {
         changeCamera = ChangeCamera.Instance;
@@ -19,8 +19,31 @@ public class Player : MonoBehaviour
         if (mainCamera.activeInHierarchy)
         {
             Move();
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Raycast();
+            }
         }
+
+
+
+
     }
+
+    private void Raycast()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 100, puzzleLayers))
+        {
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Puzzle1Pieces"))
+            {
+                changeCamera.StartPuzzle1();
+            }
+        }
+
+    }
+
 
     private void Move()
     {
@@ -34,28 +57,6 @@ public class Player : MonoBehaviour
         velocity.y += gravity;
 
         controller.Move(velocity * (Time.fixedDeltaTime * Time.fixedDeltaTime));
-    }
-
-
-
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Puzzle1"))
-            {
-                changeCamera.StartPuzzle1();
-            }
-            else if (other.gameObject.layer == LayerMask.NameToLayer("Puzzle2"))
-            {
-                changeCamera.StartPuzzle2();
-            }
-            else if (other.gameObject.layer == LayerMask.NameToLayer("Puzzle3"))
-            {
-                changeCamera.StartPuzzle3();
-            }
-        }
     }
 
 }
