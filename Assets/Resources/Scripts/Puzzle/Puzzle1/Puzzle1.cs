@@ -5,19 +5,25 @@ using UnityEngine;
 public class Puzzle1 : SingletonMonobehaviour<Puzzle1>
 {
     public List<GameObject> piecesList;
+    public List<Pieces> piecesScriptList;
     public GameObject pieces;
     public float speed = 2f;
     private bool camMove = true;
+    public bool win = false;
+
+    public MeshRenderer pointSphere;
 
     void Start()
     {
         piecesList = new List<GameObject>();
+        piecesScriptList = new List<Pieces>();
 
         int i = 1;
         foreach (Transform child in pieces.transform.GetChild(0).transform)
         {
             child.gameObject.name = i.ToString();
             piecesList.Add(child.gameObject);
+            piecesScriptList.Add(child.gameObject.GetComponent<Pieces>());
             i++;
         }
         piecesList[i - 2].gameObject.name = "0";
@@ -42,7 +48,7 @@ public class Puzzle1 : SingletonMonobehaviour<Puzzle1>
             StartCoroutine(StartMovePiece(target, target.transform.position, empty.transform.position));
             StartCoroutine(MoveEmptyPiece(empty, empty.transform.position, auxPos));
         }
-     
+        CheckTable();
     }
 
     IEnumerator StartMovePiece(GameObject target, Vector3 start, Vector3 destiny)
@@ -84,5 +90,25 @@ public class Puzzle1 : SingletonMonobehaviour<Puzzle1>
             yield return null;
         }
     }
+
+
+    private void CheckTable()
+    {
+        if (piecesScriptList[0].indexInBoard == 4 &&
+            piecesScriptList[1].indexInBoard == 3 &&
+            piecesScriptList[2].indexInBoard == 2 &&
+            piecesScriptList[3].indexInBoard == 1 &&
+            piecesScriptList[4].indexInBoard == 5)
+        {
+            win = true;
+            pointSphere.material.EnableKeyword("_EMISSION");
+            ChangeCamera.Instance.StartReturnPOV();
+        }
+    }
+
+
+
+
+
 
 }

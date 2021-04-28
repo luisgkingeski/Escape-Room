@@ -25,12 +25,6 @@ public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
         result.material = orange;
     }
 
-    void Update()
-    {
-
-
-    }
-
     private void ResetColors()
     {
         red.ResetColor();
