@@ -13,9 +13,6 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
     public CinemachineVirtualCamera puzzle2;
     public CinemachineVirtualCamera puzzle3;
 
-
-
-
     private void Start()
     {
         cinemachineCamera.SetActive(false);
@@ -51,10 +48,6 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
     }
     public IEnumerator ReturnPOV()
     {
-        //pov.m_Priority = 0;
-        //puzzle1.m_Priority = 10;
-        //puzzle2.m_Priority = 10;
-        //puzzle3.m_Priority = 10;
         pov.m_Priority = 10;
         puzzle1.m_Priority = 0;
         puzzle2.m_Priority = 0;
@@ -84,9 +77,10 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         mainCamera.SetActive(false);
         cinemachineCamera.SetActive(true);
         pov.m_Priority = 10;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         pov.m_Priority = 0;
         puzzle2.m_Priority = 10;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public IEnumerator Puzzle3()
@@ -95,9 +89,10 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         mainCamera.SetActive(false);
         cinemachineCamera.SetActive(true);
         pov.m_Priority = 10;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         pov.m_Priority = 0;
         puzzle3.m_Priority = 10;
+        Cursor.lockState = CursorLockMode.None;
     }
 
 

@@ -36,11 +36,21 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 100, puzzleLayers))
         {
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Puzzle1Pieces"))
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Puzzle1"))
             {
                 changeCamera.StartPuzzle1();
             }
+
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Puzzle2"))
+            {
+                changeCamera.StartPuzzle2();
+            }
+
         }
+
+
+
+
 
     }
 
