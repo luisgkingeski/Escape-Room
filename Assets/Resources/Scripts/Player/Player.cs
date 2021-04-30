@@ -9,21 +9,70 @@ public class Player : MonoBehaviour
     public float gravity = -9.81f;
     private ChangeCamera changeCamera;
     public LayerMask puzzleLayers;
+
+    public GameObject interactTxt;
+    public GameObject backTxt;
+    public GameObject winTxt;
+
+    private Puzzle1 puzzle1;
+    private Puzzle2 puzzle2;
+    private Puzzle3 puzzle3;
+    private Puzzle4 puzzle4;
+
     private void Start()
     {
         changeCamera = ChangeCamera.Instance;
+        interactTxt.SetActive(false);
+        backTxt.SetActive(false);
+        winTxt.SetActive(false);
+
+        puzzle1 = Puzzle1.Instance;
+        puzzle2 = Puzzle2.Instance;
+        puzzle3 = Puzzle3.Instance;
+        puzzle4 = Puzzle4.Instance;
+
     }
 
     void FixedUpdate()
     {
+        
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+
+        RaycastHit hit;
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 100, puzzleLayers))
+        {
+            interactTxt.SetActive(true);
+        }
+        else
+        {
+            interactTxt.SetActive(false);
+        }
+
         if (mainCamera.activeInHierarchy)
         {
+            backTxt.SetActive(false);
             Move();
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Raycast();
             }
+        }
+        else
+        {
+            interactTxt.SetActive(false);
+            backTxt.SetActive(true);
+        }
+
+        if (puzzle1.win && puzzle2.win && puzzle3.win && puzzle4.win)
+        {
+            interactTxt.SetActive(false);
+            backTxt.SetActive(false);
+            winTxt.SetActive(true);
         }
     }
 
@@ -48,11 +97,6 @@ public class Player : MonoBehaviour
             }
 
         }
-
-
-
-
-
     }
 
 

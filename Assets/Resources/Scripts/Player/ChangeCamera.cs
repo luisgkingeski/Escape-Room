@@ -16,32 +16,30 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
 
     private void Start()
     {
+        Cursor.visible = false;
         cinemachineCamera.SetActive(false);
     }
 
     public void StartReturnPOV()
     {
-        StartCoroutine(ReturnPOV());
+        StartCoroutine(ReturnPOV());        
     }
 
     public void StartPuzzle1()
-    {
-        StartCoroutine(Puzzle1());
+    {       
+        StartCoroutine(Puzzle1());        
     }
 
     public void StartPuzzle2()
-    {
+    {      
         StartCoroutine(Puzzle2());
-    }
-
-    public void StartPuzzle3()
-    {
-        StartCoroutine(Puzzle3());
+        
     }
 
     public void StartPuzzle4()
     {
         StartCoroutine(Puzzle4());
+        
     }
 
 
@@ -55,6 +53,7 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
     }
     public IEnumerator ReturnPOV()
     {
+        Cursor.visible = false;
         pov.m_Priority = 10;
         puzzle1.m_Priority = 0;
         puzzle2.m_Priority = 0;
@@ -63,7 +62,7 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         head.transform.parent = mainCamera.transform;
         mainCamera.SetActive(true);
         cinemachineCamera.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;        
     }
 
     public IEnumerator Puzzle1()
@@ -76,6 +75,7 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         pov.m_Priority = 0;
         puzzle1.m_Priority = 10;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public IEnumerator Puzzle2()
@@ -88,18 +88,7 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         pov.m_Priority = 0;
         puzzle2.m_Priority = 10;
         Cursor.lockState = CursorLockMode.None;
-    }
-
-    public IEnumerator Puzzle3()
-    {
-        head.transform.parent = null;
-        mainCamera.SetActive(false);
-        cinemachineCamera.SetActive(true);
-        pov.m_Priority = 10;
-        yield return new WaitForSeconds(0.1f);
-        pov.m_Priority = 0;
-        puzzle3.m_Priority = 10;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public IEnumerator Puzzle4()
@@ -112,6 +101,7 @@ public class ChangeCamera : SingletonMonobehaviour<ChangeCamera>
         pov.m_Priority = 0;
         puzzle4.m_Priority = 10;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 

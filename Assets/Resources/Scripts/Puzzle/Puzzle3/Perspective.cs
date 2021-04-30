@@ -14,9 +14,32 @@ public class Perspective : MonoBehaviour
     float originalScale;
     Vector3 targetScale;
 
+    public GameObject grabTxt;
+
+    private void Start()
+    {
+        grabTxt.SetActive(false);
+    }
+
     void Update()
     {
-        HandleInput();
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, targetMask))
+        {            
+            if (!Input.GetMouseButton(0))
+            {
+                grabTxt.SetActive(true);
+            }else if (!Input.GetMouseButtonUp(0))
+            {
+                grabTxt.SetActive(false);
+            }
+        }
+        else
+        {
+            grabTxt.SetActive(false);
+        }
+
+            HandleInput();
         ResizeTarget();
     }
 
@@ -27,7 +50,6 @@ public class Perspective : MonoBehaviour
         {
             if (target == null)
             {
-
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, targetMask))
                 {
