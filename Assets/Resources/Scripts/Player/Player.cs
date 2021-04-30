@@ -25,10 +25,6 @@ public class Player : MonoBehaviour
                 Raycast();
             }
         }
-
-
-
-
     }
 
     private void Raycast()
@@ -44,6 +40,11 @@ public class Player : MonoBehaviour
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Puzzle2"))
             {
                 changeCamera.StartPuzzle2();
+            }
+
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Puzzle4"))
+            {
+                changeCamera.StartPuzzle4();
             }
 
         }
