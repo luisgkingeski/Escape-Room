@@ -54,6 +54,8 @@ public class Player : MonoBehaviour
 
         if (mainCamera.activeInHierarchy)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             backTxt.SetActive(false);
             Move();
 
@@ -64,6 +66,8 @@ public class Player : MonoBehaviour
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             interactTxt.SetActive(false);
             backTxt.SetActive(true);
         }
