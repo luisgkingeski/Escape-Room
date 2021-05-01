@@ -31,6 +31,7 @@ public class Puzzle1 : SingletonMonobehaviour<Puzzle1>
 
     public void MovePiece(int index)
     {
+        SoundManager.Instance.PlayPuzzle1Sound();
         if (camMove)
         {
             GameObject target = piecesList[index - 1];

@@ -9,12 +9,11 @@ public class Menu : MonoBehaviour
     private void Start()
     {
         scene = SceneManager.GetActiveScene();
-
         if (scene.buildIndex == 1)
         {
             pauseMenu.SetActive(false);
         }
-
+    
     }
 
     public void BtnPlay()
@@ -22,9 +21,9 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if(scene.buildIndex == 1)
+        if (scene.buildIndex == 1)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -33,7 +32,8 @@ public class Menu : MonoBehaviour
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0f;
             }
-        }
+        }     
+
     }
 
     public void BtnContinue()

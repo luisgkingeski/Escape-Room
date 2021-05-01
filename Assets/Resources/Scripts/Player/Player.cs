@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : SingletonMonobehaviour<Player>
 {
     public CharacterController controller;
     public float speed = 12f;

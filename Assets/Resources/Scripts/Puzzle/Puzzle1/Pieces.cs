@@ -100,7 +100,7 @@ public class Pieces : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (canMove)
+        if (canMove && !p.win)
         {
             p.MovePiece(pieceIndex);
         }

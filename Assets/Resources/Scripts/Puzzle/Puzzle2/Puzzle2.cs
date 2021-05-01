@@ -19,10 +19,12 @@ public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
 
     public bool win = false;
 
+    private SoundManager soundManager;
 
     void Start()
     {
         result.material = orange;
+        soundManager = SoundManager.Instance;
     }
 
     private void ResetColors()
@@ -59,15 +61,19 @@ public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
 
     IEnumerator CheckOrange()
     {
+
         if (red.selected && !blue.selected && yellow.selected)
         {
             pointSphere1.material.EnableKeyword("_EMISSION");
             result.material = green;
             resultIndex = 2;
         }
-
+      
         yield return new WaitForSeconds(1);
         ResetColors();
+
+        soundManager.PlayPuzzle2SoundFail();
+
     }
 
     IEnumerator CheckGreen()
@@ -81,6 +87,8 @@ public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
 
         yield return new WaitForSeconds(1);
         ResetColors();
+
+        soundManager.PlayPuzzle2SoundFail();
     }
 
     IEnumerator CheckPurple()
@@ -94,6 +102,8 @@ public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
 
         yield return new WaitForSeconds(1);
         ResetColors();
+
+        soundManager.PlayPuzzle2SoundFail();
     }
 
 

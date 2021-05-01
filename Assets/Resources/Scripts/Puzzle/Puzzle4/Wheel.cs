@@ -1,30 +1,36 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Wheel : MonoBehaviour
 {
     private bool coroutineAllowed;
     public int numberShown;
+    private SoundManager soundManager;
+    private Puzzle4 p;
 
     private void Start()
     {
         coroutineAllowed = true;
         numberShown = 0;
+        soundManager = SoundManager.Instance;
+        p = Puzzle4.Instance;
     }
 
     private void OnMouseDown()
     {
-        if (coroutineAllowed)
+        if (!p.win)
         {
-            StartCoroutine("RotateWheel");
+            if (coroutineAllowed)
+            {
+                StartCoroutine("RotateWheel");
+            }
         }
     }
 
     private IEnumerator RotateWheel()
     {
         coroutineAllowed = false;
-
+        soundManager.PlayPuzzle4Sound();
         for (int i = 0; i <= 11; i++)
         {
             transform.Rotate(0f, 3f, 0f);

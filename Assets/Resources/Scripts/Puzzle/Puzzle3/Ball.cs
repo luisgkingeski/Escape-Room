@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("Puzzle3"))
         {
             Puzzle3.Instance.Win();
+            GetComponent<AudioSource>().Play();
         }
     }
 

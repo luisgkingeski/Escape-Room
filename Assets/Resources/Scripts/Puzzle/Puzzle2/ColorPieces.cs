@@ -1,36 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ColorPieces : MonoBehaviour
 {
 
     public bool selected = false;
-    [Tooltip ("1 is red, 2 is blue, 3 is yellow")]
-    [Range (1,3)]
-    public int color;
-    private MeshRenderer rend;
+    private Animator anim;
+    private Puzzle2 p;
 
     void Start()
     {
-        rend = GetComponent<MeshRenderer>();
-        rend.material.DisableKeyword("_EMISSION");
+        anim = GetComponent<Animator>();
+        p = Puzzle2.Instance;
     }
 
     private void OnMouseDown()
-    {        
-        rend.material.EnableKeyword("_EMISSION");
-        if (!selected)
+    {
+        if (!p.win)
         {
-            selected = true;
-            Puzzle2.Instance.Select();
-        }        
+            if (!selected)
+            {
+                SoundManager.Instance.PlayPuzzle2SoundClick();
+                anim.SetBool("Fail", false);
+                anim.SetBool("Pressed", true);
+                selected = true;
+                Puzzle2.Instance.Select();
+            }
+        }
     }
 
     public void ResetColor()
     {
         selected = false;
-        rend.material.DisableKeyword("_EMISSION");
+        anim.SetBool("Pressed", false);
+        anim.SetBool("Fail", true);
+
     }
 
 }
