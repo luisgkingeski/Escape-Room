@@ -1,6 +1,6 @@
 # Escape Room
 
-Escape room is a game about solving puzzles to escape from a room
+Escape room is a game about solving puzzles to escape from a room. You have 10 minutes.
 
 This project uses unity **2019.4.11f1**
 
