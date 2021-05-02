@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class Puzzle1 : SingletonMonobehaviour<Puzzle1>
 {
-    public List<GameObject> piecesList;
-    public List<Pieces> piecesScriptList;
-    public GameObject pieces;
+    #region Variables
+
     public float speed = 2f;
     private bool camMove = true;
     public bool win = false;
 
+    #endregion
+
+    #region References
+
+    public List<GameObject> piecesList;
+    public List<Pieces> piecesScriptList;
+    public GameObject pieces;
     public MeshRenderer pointSphere;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
 
     void Start()
     {
@@ -28,6 +38,28 @@ public class Puzzle1 : SingletonMonobehaviour<Puzzle1>
         }
         piecesList[i - 2].gameObject.name = "0";
     }
+
+    #endregion
+
+    #region Private Methods
+
+    private void CheckTable()
+    {
+        if (piecesScriptList[0].indexInBoard == 4 &&
+            piecesScriptList[1].indexInBoard == 3 &&
+            piecesScriptList[2].indexInBoard == 2 &&
+            piecesScriptList[3].indexInBoard == 1 &&
+            piecesScriptList[4].indexInBoard == 5)
+        {
+            win = true;
+            pointSphere.material.EnableKeyword("_EMISSION");
+            ChangeCamera.Instance.StartReturnPOV();
+        }
+    }
+
+    #endregion
+
+    #region Public Methods
 
     public void MovePiece(int index)
     {
@@ -51,6 +83,10 @@ public class Puzzle1 : SingletonMonobehaviour<Puzzle1>
         }
         CheckTable();
     }
+
+    #endregion
+
+    #region Coroutines
 
     IEnumerator StartMovePiece(GameObject target, Vector3 start, Vector3 destiny)
     {
@@ -92,24 +128,5 @@ public class Puzzle1 : SingletonMonobehaviour<Puzzle1>
         }
     }
 
-
-    private void CheckTable()
-    {
-        if (piecesScriptList[0].indexInBoard == 4 &&
-            piecesScriptList[1].indexInBoard == 3 &&
-            piecesScriptList[2].indexInBoard == 2 &&
-            piecesScriptList[3].indexInBoard == 1 &&
-            piecesScriptList[4].indexInBoard == 5)
-        {
-            win = true;
-            pointSphere.material.EnableKeyword("_EMISSION");
-            ChangeCamera.Instance.StartReturnPOV();
-        }
-    }
-
-
-
-
-
-
+    #endregion
 }

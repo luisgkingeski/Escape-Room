@@ -2,10 +2,20 @@
 
 public class ColorPieces : MonoBehaviour
 {
+    #region Variables
 
     public bool selected = false;
+
+    #endregion
+
+    #region References
+
     private Animator anim;
     private Puzzle2 p;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
 
     void Start()
     {
@@ -28,12 +38,16 @@ public class ColorPieces : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Public Methods
+
     public void ResetColor()
     {
         selected = false;
         anim.SetBool("Pressed", false);
         anim.SetBool("Fail", true);
-
     }
 
+    #endregion
 }

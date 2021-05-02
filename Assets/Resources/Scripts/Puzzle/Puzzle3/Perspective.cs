@@ -2,19 +2,27 @@
 
 public class Perspective : MonoBehaviour
 {
-    [Header("Components")]
-    public Transform target;
+    #region Variables
 
-    [Header("Parameters")]
-    public LayerMask targetMask;
-    public LayerMask ignoreTargetMask;
     public float offsetFactor;
-
     float originalDistance;
     float originalScale;
     Vector3 targetScale;
 
+    #endregion
+
+    #region References
+
+    [Header("Components")]
+    public Transform target;
+    [Header("Parameters")]
+    public LayerMask targetMask;
+    public LayerMask ignoreTargetMask;
     public GameObject grabTxt;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
 
     private void Start()
     {
@@ -25,11 +33,12 @@ public class Perspective : MonoBehaviour
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, targetMask))
-        {            
+        {
             if (!Input.GetMouseButton(0))
             {
                 grabTxt.SetActive(true);
-            }else if (!Input.GetMouseButtonUp(0))
+            }
+            else if (!Input.GetMouseButtonUp(0))
             {
                 grabTxt.SetActive(false);
             }
@@ -39,11 +48,15 @@ public class Perspective : MonoBehaviour
             grabTxt.SetActive(false);
         }
 
-            HandleInput();
+        HandleInput();
         ResizeTarget();
     }
 
-    void HandleInput()
+    #endregion
+
+    #region Private Methods
+
+    private void HandleInput()
     {
 
         if (Input.GetMouseButtonDown(0))
@@ -79,7 +92,7 @@ public class Perspective : MonoBehaviour
         }
     }
 
-    void ResizeTarget()
+    private void ResizeTarget()
     {
         if (target == null)
         {
@@ -112,4 +125,6 @@ public class Perspective : MonoBehaviour
             }
         }
     }
+
+    #endregion
 }

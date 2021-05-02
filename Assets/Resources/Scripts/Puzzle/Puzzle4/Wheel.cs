@@ -3,10 +3,21 @@ using UnityEngine;
 
 public class Wheel : MonoBehaviour
 {
+    #region Variables
+
     private bool coroutineAllowed;
     public int numberShown;
+
+    #endregion
+
+    #region References
+
     private SoundManager soundManager;
     private Puzzle4 p;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
 
     private void Start()
     {
@@ -26,6 +37,10 @@ public class Wheel : MonoBehaviour
             }
         }
     }
+
+    #endregion
+
+    #region Coroutines
 
     private IEnumerator RotateWheel()
     {
@@ -47,4 +62,6 @@ public class Wheel : MonoBehaviour
         }
         Puzzle4.Instance.UpdatePad(gameObject.name, numberShown);
     }
+
+    #endregion
 }

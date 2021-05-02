@@ -1,23 +1,35 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : SingletonMonobehaviour<Player>
 {
-    public CharacterController controller;
+    #region Variables
+
     public float speed = 12f;
-    public GameObject mainCamera;
-    private Vector3 velocity;
     public float gravity = -9.81f;
+    private bool win = false;
+    private Vector3 velocity;
+
+    #endregion
+
+    #region References
+
+    public CharacterController controller;
+    public GameObject mainCamera;
     private ChangeCamera changeCamera;
     public LayerMask puzzleLayers;
-
+    public LayerMask doorLayer;
     public GameObject interactTxt;
     public GameObject backTxt;
     public GameObject winTxt;
-
     private Puzzle1 puzzle1;
     private Puzzle2 puzzle2;
     private Puzzle3 puzzle3;
     private Puzzle4 puzzle4;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
 
     private void Start()
     {
@@ -35,15 +47,23 @@ public class Player : SingletonMonobehaviour<Player>
 
     void FixedUpdate()
     {
-        
-        if (Input.GetKey(KeyCode.Escape))
+        RaycastHit hit;
+
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 10, doorLayer) && win)
         {
-            Application.Quit();
+            winTxt.SetActive(true);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                SceneManager.LoadScene(2);
+            }
+        }
+        else
+        {
+            winTxt.SetActive(false);
         }
 
-
-        RaycastHit hit;
-        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 100, puzzleLayers))
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 5, puzzleLayers))
         {
             interactTxt.SetActive(true);
         }
@@ -76,9 +96,14 @@ public class Player : SingletonMonobehaviour<Player>
         {
             interactTxt.SetActive(false);
             backTxt.SetActive(false);
-            winTxt.SetActive(true);
+            SoundManager.Instance.PlayDoor();
+            win = true;
         }
     }
+
+    #endregion
+
+    #region Private Methods
 
     private void Raycast()
     {
@@ -99,10 +124,8 @@ public class Player : SingletonMonobehaviour<Player>
             {
                 changeCamera.StartPuzzle4();
             }
-
         }
     }
-
 
     private void Move()
     {
@@ -118,4 +141,5 @@ public class Player : SingletonMonobehaviour<Player>
         controller.Move(velocity * (Time.fixedDeltaTime * Time.fixedDeltaTime));
     }
 
+    #endregion
 }

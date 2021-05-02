@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class SingletonMonobehaviour<T> : MonoBehaviour where T : SingletonMonobehaviour<T>
 {
@@ -9,7 +7,10 @@ public abstract class SingletonMonobehaviour<T> : MonoBehaviour where T : Single
     protected virtual void Awake()
     {
         if (Instance != null && Instance != this)
+        {
             Destroy(Instance.gameObject);
+        }
+
         Instance = (T)this;
     }
 }

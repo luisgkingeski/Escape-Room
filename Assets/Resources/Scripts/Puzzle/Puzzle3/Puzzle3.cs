@@ -2,9 +2,20 @@
 
 public class Puzzle3 : SingletonMonobehaviour<Puzzle3>
 {
+    #region Variables
+
+    public bool win = false;
+
+    #endregion
+
+    #region References
+
     public MeshRenderer pointSphere;
     public Perspective perspective;
-    public bool win = false;
+
+    #endregion
+
+    #region Public Methods
 
     public void Win()
     {
@@ -12,4 +23,6 @@ public class Puzzle3 : SingletonMonobehaviour<Puzzle3>
         perspective.enabled = false;
         win = true;
     }
+
+    #endregion
 }

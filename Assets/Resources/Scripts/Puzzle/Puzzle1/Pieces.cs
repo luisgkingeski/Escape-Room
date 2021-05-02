@@ -3,17 +3,28 @@ using UnityEngine;
 
 public class Pieces : MonoBehaviour
 {
+    #region Variables
+
     public int pieceIndex;
     public int indexInBoard;
-    public LayerMask layerMask;
     public bool canMove = false;
+
+    #endregion
+
+    #region References
+
+    public LayerMask layerMask;
     private Puzzle1 p;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
+
     private void Start()
     {
         p = Puzzle1.Instance;
         StartCoroutine(GetIndex());
     }
-
 
     private void Update()
     {
@@ -23,6 +34,19 @@ public class Pieces : MonoBehaviour
             Raycasts();
         }
     }
+
+
+    private void OnMouseDown()
+    {
+        if (canMove && !p.win)
+        {
+            p.MovePiece(pieceIndex);
+        }
+    }
+
+    #endregion
+
+    #region Private Methods
 
     private void Raycasts()
     {
@@ -91,6 +115,10 @@ public class Pieces : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Coroutines
+
     IEnumerator GetIndex()
     {
         yield return new WaitForSeconds(0.1f);
@@ -98,11 +126,5 @@ public class Pieces : MonoBehaviour
         indexInBoard = pieceIndex;
     }
 
-    private void OnMouseDown()
-    {
-        if (canMove && !p.win)
-        {
-            p.MovePiece(pieceIndex);
-        }
-    }
+    #endregion
 }

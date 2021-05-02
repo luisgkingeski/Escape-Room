@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using Cinemachine;
-using System.Collections;
+﻿using Cinemachine;
+using UnityEngine;
 
 public class CinechineShake : MonoBehaviour
 {

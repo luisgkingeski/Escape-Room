@@ -1,21 +1,31 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class MouseLook : MonoBehaviour
+public class MouseLook : SingletonMonobehaviour<MouseLook>
 {
-    public float mouseSensitivity = 100f;
+    #region Variables
 
-    public Transform playerBody;
-
+    public float mouseSensitivity = 1;
     public float xRotation = 0f;
 
+    #endregion
 
-    // Start is called before the first frame update
+    #region References
+
+    public Transform playerBody;
+    public Slider slider;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
+
     void Start()
     {
+        slider.value = 1;
+        UpdateMouseSensitivity();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -26,7 +36,18 @@ public class MouseLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
 
+        playerBody.Rotate(Vector3.up * mouseX);
     }
+
+    #endregion
+
+    #region Public Methods
+
+    public void UpdateMouseSensitivity()
+    {
+        mouseSensitivity = slider.value;
+    }
+
+    #endregion
 }

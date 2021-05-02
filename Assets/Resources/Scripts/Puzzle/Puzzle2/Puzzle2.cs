@@ -3,29 +3,39 @@ using UnityEngine;
 
 public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
 {
-    public ColorPieces red;
-    public ColorPieces blue;
-    public ColorPieces yellow;
+    #region Variables
 
     public int selectedAmount = 0;
     public int resultIndex = 1;
+    public bool win = false;
 
+    #endregion
+
+    #region References
+
+    public ColorPieces red;
+    public ColorPieces blue;
+    public ColorPieces yellow;
     public MeshRenderer pointSphere1;
     public MeshRenderer pointSphere2;
     public MeshRenderer pointSphere3;
     public MeshRenderer result;
-
     public Material orange, green, purple;
-
-    public bool win = false;
-
     private SoundManager soundManager;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
 
     void Start()
     {
         result.material = orange;
         soundManager = SoundManager.Instance;
     }
+
+    #endregion
+
+    #region Private Methods
 
     private void ResetColors()
     {
@@ -35,6 +45,9 @@ public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
         selectedAmount = 0;
     }
 
+    #endregion
+
+    #region Public Methods
 
     public void Select()
     {
@@ -54,26 +67,25 @@ public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
             {
                 StartCoroutine(CheckPurple());
             }
-
         }
-
     }
+
+    #endregion
+
+    #region Coroutines
 
     IEnumerator CheckOrange()
     {
-
         if (red.selected && !blue.selected && yellow.selected)
         {
             pointSphere1.material.EnableKeyword("_EMISSION");
             result.material = green;
             resultIndex = 2;
         }
-      
+
         yield return new WaitForSeconds(1);
         ResetColors();
-
         soundManager.PlayPuzzle2SoundFail();
-
     }
 
     IEnumerator CheckGreen()
@@ -106,7 +118,5 @@ public class Puzzle2 : SingletonMonobehaviour<Puzzle2>
         soundManager.PlayPuzzle2SoundFail();
     }
 
-
-
-
+    #endregion
 }

@@ -2,18 +2,33 @@
 
 public class SoundManager : SingletonMonobehaviour<SoundManager>
 {
+    #region References
+
     public AudioSource puzzle1;
     public AudioSource puzzle2;
     public AudioClip puzzle2Click, puzzle2Fail;
     public AudioSource walk;
     public AudioSource puzzle4;
+    public AudioSource door;
+
+    #endregion
+
+    #region Variables
 
     private bool isWalking = false;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
 
     private void Update()
     {
         WalkSounds();
     }
+
+    #endregion
+
+    #region Private Methods
 
     private void WalkSounds()
     {
@@ -40,13 +55,20 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
             }
         }
 
-        if(Time.timeScale == 0)
+        if (Time.timeScale == 0)
         {
             isWalking = false;
             walk.Stop();
         }
+    }
 
+    #endregion
 
+    #region Public Methods
+
+    public void PlayDoor()
+    {
+        door.Play();
     }
 
     public void PlayPuzzle1Sound()
@@ -69,4 +91,5 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         puzzle4.PlayOneShot(puzzle4.clip);
     }
 
+    #endregion
 }

@@ -3,8 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    #region References
+
     public GameObject pauseMenu;
     private Scene scene;
+
+    #endregion
+
+    #region MonoBehaviour Callbacks
 
     private void Start()
     {
@@ -13,13 +19,11 @@ public class Menu : MonoBehaviour
         {
             pauseMenu.SetActive(false);
         }
-    
     }
 
-    public void BtnPlay()
-    {
-        SceneManager.LoadScene(1);
-    }
+    #endregion
+
+    #region Private Methods
 
     private void FixedUpdate()
     {
@@ -32,8 +36,16 @@ public class Menu : MonoBehaviour
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0f;
             }
-        }     
+        }
+    }
 
+    #endregion
+
+    #region Public Methods
+
+    public void BtnPlay()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void BtnContinue()
@@ -48,4 +60,6 @@ public class Menu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    #endregion
 }
