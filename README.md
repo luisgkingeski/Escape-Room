@@ -2,7 +2,7 @@
 
 Escape room is a game about solving puzzles to escape from a room. You have 10 minutes.
 
-This project uses unity **2019.4.17**
+This project uses unity **2019.4.17f1**
 
 If cloning, install git lfs https://git-lfs.github.com/
 
