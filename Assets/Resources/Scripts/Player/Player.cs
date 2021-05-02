@@ -9,7 +9,7 @@ public class Player : SingletonMonobehaviour<Player>
     public float gravity = -9.81f;
     private bool win = false;
     private Vector3 velocity;
-
+    private bool doorAux = false;
     #endregion
 
     #region References
@@ -92,8 +92,9 @@ public class Player : SingletonMonobehaviour<Player>
             backTxt.SetActive(true);
         }
 
-        if (puzzle1.win && puzzle2.win && puzzle3.win && puzzle4.win)
+        if (puzzle1.win && puzzle2.win && puzzle3.win && puzzle4.win && !doorAux)
         {
+            doorAux = true;
             interactTxt.SetActive(false);
             backTxt.SetActive(false);
             SoundManager.Instance.PlayDoor();
