@@ -28,6 +28,7 @@ Click on the images on the left that form the image on the right.
 ### Puzzle 3 - Perspective ball
 
 Adjust the size of the ball to fit the hole
+
 ![alt text](https://user-images.githubusercontent.com/44435379/116798797-bfec1280-aac9-11eb-864f-540cf1f89503.png)
 ### Puzzle 4 - Numeric padlock
 The code is next to the bookcase (3715).
