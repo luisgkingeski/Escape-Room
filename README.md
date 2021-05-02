@@ -2,9 +2,11 @@
 
 Escape room is a game about solving puzzles to escape from a room
 
+This project uses unity **2019.4.11f1**
+
 If cloning, install git lfs https://git-lfs.github.com/
 
-Build available in
+Build direct download https://github.com/luisgkingeski/Escape-Room/releases/download/Build/EscapeRoom-LuisGabrielKingeski.zip
 
 ## Puzzles
 
