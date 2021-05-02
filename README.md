@@ -2,6 +2,10 @@
 
 Escape room is a game about solving puzzles to escape from a room
 
+If cloning, install git lfs https://git-lfs.github.com/
+
+Build available in
+
 ## Puzzles
 
 ### Puzzle 1 - Painting
