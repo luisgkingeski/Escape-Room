@@ -16,7 +16,8 @@ Change size according to your perspective. The closer, the bigger, the farther, 
 ### Puzzle 4 - Numeric padlock
 ![alt text](https://user-images.githubusercontent.com/44435379/116798664-75b66180-aac8-11eb-9e19-09e51368f93e.png)
 
-# Solutions
+<details><summary>Solutions</summary>
+<p>
 
 ### Puzzle 1 - Painting
 
@@ -35,4 +36,7 @@ The code is next to the bookcase (3715).
 
 ![alt text](https://user-images.githubusercontent.com/44435379/116798760-6daaf180-aac9-11eb-8ed6-01358ec34b55.png)
 
+
+</p>
+</details>
 
