@@ -30,7 +30,7 @@ Click on the images on the left that form the image on the right.
 
 ### Puzzle 3 - Perspective ball
 
-Change size according to your perspective. The closer, the bigger, the farther, the smaller.
+Change size according to your perspective.
 
 ![alt text](https://user-images.githubusercontent.com/44435379/116798655-5a4b5680-aac8-11eb-9381-13ccef777e28.png)
 <details><summary>Solution</summary>
